@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <meta charset="utf-8"> -->
+  <title>It is Always Train Time</title>
+  <link rel="stylesheet" href="traintime.css">
+  <!-- bootstrap link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+  <!-- container -->
+  <div id=heading class="container">
+    <div class="jumbotron">
+      <h1>Subway Train Schedule</h1>
+      <p>The little train that could</p>
+    </div>
+
+    <!-- 1st panel - schedule -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title ">Current Schedule</h3>
+          </div>
+          <!-- <div id='train-times' class="panel-body"></div> -->
+          <!-- table -->
+          <table class="table table-striped">
+            <head>
+            <th>Train Name</th>
+            <th>Destination</th>
+            <th>Frequency (min)</th>
+            <th>Next Arrival</th>
+            <th>Minutes Away</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Manhattan</th>
+                <th>New York</th>
+                <th>24</th>
+                <th>1 am</th>
+                <th>5</th>
+              </tr>
+              <tr>
+                <th>Grand Cayman</th>
+                <th>The Ritz</th>
+                <th>12</th>
+                <th>6 am</th>
+                <th>4</th>
+              </tr>
+              <tr>
+                <th>Laredo</th>
+                <th>El Rancho Grande</th>
+                <th>6</th>
+                <th>10 am</th>
+                <th>3</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- 2nd panel - train name, destination, time and frequenzy -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add Train</h3>
+        </div>
+        <div class="panel-body">
+        <!-- form  -->
+        <form>
+          <!-- train name -->
+          <div class="form-group">
+            <label for="train-name">Train Name</label>
+            <input type="text" class="form-control" id="train-name" placeholder="">
+          </div>
+          <!-- destination -->
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" class="form-control" id="destination" placeholder="">
+          </div>
+          <!-- frist train time -->
+          <div class="form-group">
+            <label for="first-train-time">First Train Time (HH:mm - military time) </label>
+            <input type="text" class="form-control" id="first-train" placeholder="">
+          </div>
+          <!-- frequency -->
+          <div class="form-group">
+            <label for="frequency">Frequency (min)</label>
+            <input class="form-control" type="text" placeholder="">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+        <!-- end of form -->
+      </div>
+    </div>
+  </div>
+
+  <!-- end of container   -->
+  </div>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+  <!-- momentsjs-->
+   <script src="https://momentjs.com/downloads/moment.js"></script>
+  <!-- javascript file -->
+  <script type="text/javascript" src="traintime.js"></script>
+</body>
+
+</html>
