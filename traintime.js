@@ -1,4 +1,4 @@
-// alert("connect");
+alert("connect");
 
 var config = {
     apiKey: "AIzaSyAdPBqSOO-h25-Bq5VtluibPgKuumAD8aA",
@@ -8,66 +8,57 @@ var config = {
     storageBucket: "testing-8c9f4.appspot.com",
     messagingSenderId: "928430822425"
   };
-  var trains = [];
-  var btnSubmit = document.getElementById('submit');
 
   firebase.initializeApp(config);
-  var db = firebase.database();
-  var trainRefreshenr;
 
-  var dbObject;
-  loaddatabase();
+  // serve as a reference to firebase database
+  var trainData = firebase.database();
 
-// database
-  function loadDatabase () {
-    db.ref('trains').once('value').then(snapshot => {
-      dbObject = snapshot.val();
-      for (key in dbObject){
-        trains.push(dbObject[key]);
-      }
+// when Btn clicked information will be stored
+ $("#addTrainBtn").on("click",function(){
+  var trainName = $("#trainNameInput").val().trim();
+  var destination = $("#destinationInput").val().trim();
+  // add moments js
+  var firstTrain = moment($("#firstTrainInput").val().trim(),"HH:mm").subtract(10,"years").format("X");
+  var frequency = $("#frequencyInput").val().trim();
+//
+//
+// console.log(firstTrain);
+// return false;
 
-// create interval
-  populateTable();
-  trainRefresher = setInterval(populateTable, 6000);
-});
-  }
-// push (add) trains
-function addTrain (train) {
-  db.ref('trains').push(train);
-  trains.push(train);
-}
-
-function popuplateTable () {
-  var divTable = document.getElementById('train-times');
-
-  var html = `<table class='table table-striped'>
-               <thead>
-                 <tr>
-                   <th>Train Name</th>
-                   <th>Destination</th>
-                   <th>Frequency (min)</th>
-                   <th>Next Arrival</th>
-                   <th>Minutes Away</th>
-                 </tr>
-               </thead>
-               <tbody>`;
-// populate table body
-trains.forEach(train =>{
-  if (!train){
-  }
-  // new train database
-btnSubmit.addEventListener('click', (event) => {
-  event.preventDefault();
-
-  // on click
   var newTrain = {
-    name: document.getElementById('train-name').value,
-    destination: document.getElementById('destination').value,
-    frequency: document.getElementById('frequency').value,
-    first_train_time: document.getElementById('first-train').value
-  };
+    name: trainName,
+    destination: destination,
+     firstTrain: firstTrain,
+     frequency: frequency
+  }
 
-  // add train and update
-  addTrain(newTrain);
-  populateTable();
-});
+trainData.ref().push(newTrain);
+
+alert("Train Added");
+
+$("#trainNameInput").val("");
+$("#destinationInput").val("");
+$("#firstTrainInput").val("");
+$("#frequencyInput").val("");
+
+return false;
+})
+// collect data from firebase
+trainData.ref().on("child_added", function(snapshot){
+  var name = snapshot.val().name;
+  var destination = snapshot.val().destination;
+  var frequency = snapshot.val().frequency;
+  var firstTrain = snapshot.val().firstTrain;
+
+  var remainder = moment().diff(moment.unix(firstTrain),"minutes")%frequency;
+  var minutes = frequency - remainder;
+  var arrival = moment().add(minutes,"m").format("hh:mm A");
+
+  console.log(remainder);
+  console.log(minutes);
+  console.log(arrival);
+
+$("#trainTable > tBody").append("<tr><td>"+name+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+arrival+"</td><td>"+minutes+"</td></tr>");
+
+})
