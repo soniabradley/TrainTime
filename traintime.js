@@ -1,12 +1,12 @@
 alert("connect");
 
-var config = {
-    apiKey: "AIzaSyAdPBqSOO-h25-Bq5VtluibPgKuumAD8aA",
-    authDomain: "testing-8c9f4.firebaseapp.com",
-    databaseURL: "https://testing-8c9f4.firebaseio.com",
-    projectId: "testing-8c9f4",
-    storageBucket: "testing-8c9f4.appspot.com",
-    messagingSenderId: "928430822425"
+  var config = {
+    apiKey: "AIzaSyD0RK1EUnChrOkDBzSHPBoqUhORg2Y7Xd4",
+    authDomain: "the-little-train-that-could.firebaseapp.com",
+    databaseURL: "https://the-little-train-that-could.firebaseio.com",
+    projectId: "the-little-train-that-could",
+    storageBucket: "the-little-train-that-could.appspot.com",
+    messagingSenderId: "727149030680"
   };
 
   firebase.initializeApp(config);
@@ -32,6 +32,7 @@ var config = {
      firstTrain: firstTrain,
      frequency: frequency
   }
+console.log(newTrain);
 
 trainData.ref().push(newTrain);
 
